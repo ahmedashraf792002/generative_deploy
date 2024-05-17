@@ -1,0 +1,14 @@
+flask
+numpy
+scipy
+scikit-learn
+pandas
+gunicorn
+Jinja2
+Werkzeug
+MarkupSafe
+tensorflow
+keras
+Pillow
+transformers
+pytorch

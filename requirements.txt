@@ -2,7 +2,6 @@ flask
 scikit-learn
 pandas
 gunicorn
-os
 Pillow
 transformers
 torch

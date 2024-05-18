@@ -3,5 +3,5 @@ scikit-learn
 pandas
 gunicorn
 Pillow
-transformers
+Transformers
 torch

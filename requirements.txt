@@ -6,4 +6,3 @@ os
 Pillow
 transformers
 torch
-torch torchvision torchaudio

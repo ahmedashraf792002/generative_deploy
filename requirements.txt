@@ -1,7 +1,5 @@
 flask
-scikit-learn
-pandas
 gunicorn
-Pillow
+Pillow == 9.4.0
 Transformers
 torch

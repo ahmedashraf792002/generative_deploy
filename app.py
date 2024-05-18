@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, jsonify, render_template
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
@@ -27,27 +26,24 @@ def index():
 @app.route('/generate', methods=['POST'])
 def generate_text():
     data = request.form['Data']
-    sequence = data
-    if not sequence:
+    if not data:
         return jsonify({"error": "No input sequence provided"}), 400
 
     # Encode input sequence
-    ids = tokenizer.encode(sequence, return_tensors='pt')
+    ids = tokenizer.encode(data, return_tensors='pt')
     
     # Generate text
     final_outputs = model.generate(
         ids,
         do_sample=True,
         max_length=max_length,
-        pad_token_id=model.config.eos_token_id,
+        pad_token_id=tokenizer.eos_token_id,
         top_k=50,
         top_p=0.95,
     )
     
     # Decode generated text
     text = tokenizer.decode(final_outputs[0], skip_special_tokens=True)
-    if len(text.split('"')[1]) > 1:
-        text = text.split('"')[1]
     return jsonify({"generated_text": text})
 
 if __name__ == '__main__':

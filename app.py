@@ -2,9 +2,6 @@ import os
 from flask import Flask, request, jsonify, render_template
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
-# Disable symlinks warning
-#os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
-
 # Load model and tokenizer
 def load_model(model_path):
     model = GPT2LMHeadModel.from_pretrained(model_path)
@@ -49,9 +46,10 @@ def generate_text():
     
     # Decode generated text
     text = tokenizer.decode(final_outputs[0], skip_special_tokens=True)
-    if len(text.split('"')[1])>1:
+    if len(text.split('"')[1]) > 1:
         text = text.split('"')[1]
     return jsonify({"generated_text": text})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
